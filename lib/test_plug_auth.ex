@@ -17,7 +17,6 @@ defmodule TestPlugAuth do
   end
 
   def call(conn, _options) do
-#    conn
-    _options
+    conn
   end
 end
