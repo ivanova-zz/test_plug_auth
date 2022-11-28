@@ -30,7 +30,8 @@ defmodule TestPlugAuth.MixProject do
       contributors: ["Yuliia Ivanova"],
       licenses: ["MIT"],
       links: %{github: "https://github.com/ivanova-zz/test_plug_auth"},
-      files: ~w(lib mix.exs README.md)
+      files: ~w(lib mix.exs README.md),
+      description: "test"
     ]
   end
 end
