@@ -39,4 +39,16 @@ defmodule TestPlugAuth do
   def call(conn, _options) do
     conn
   end
+
+  def validate_user_id(conn, user_id) do
+    user = Guardian.Plug.current_resource(conn)
+    if user_id == user.id do
+      conn
+    else
+#      {:invalid_payload, %BadTokenException{}}
+      conn
+      |> put_flash(:error, "You need to sign in or sign up before continuing.")
+      |> halt()
+    end
+  end
 end
