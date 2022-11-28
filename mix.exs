@@ -21,9 +21,14 @@ defmodule TestPlugAuth.MixProject do
 
   # Run "mix help deps" to learn about dependencies.
   defp deps do
-    [{:cowboy, "~> 2.9"},
+    [
+      {:cowboy, "~> 2.9"},
       {:plug, "~> 0.14 or ~> 1.0"},
-      {:ex_doc, ">= 0.0.0", only: :dev, runtime: false}]
+      {:ex_doc, ">= 0.0.0", only: :dev, runtime: false},
+      {:comeonin, "~> 4.0"},
+      {:bcrypt_elixir, "~> 1.0"},
+      {:guardian, "~> 1.0"}
+    ]
   end
 
   defp package do
