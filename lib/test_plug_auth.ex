@@ -12,7 +12,11 @@ defmodule TestPlugAuth do
       :world
 
   """
-  def hello do
-    :world
+  def init(options) do
+    options
+  end
+
+  def call(conn, _options) do
+    conn
   end
 end

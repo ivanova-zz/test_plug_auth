@@ -23,4 +23,13 @@ defmodule TestPlugAuth.MixProject do
     [{:cowboy, "~> 2.9"},
       {:plug, "~> 0.14 or ~> 1.0"}]
   end
+
+  defp package do
+    [
+      contributors: ["Yuliia Ivanova"],
+      licenses: ["MIT"],
+      links: %{github: "https://github.com/ivanova-zz/test_plug_auth"},
+      files: ~w(lib mix.exs README.md)
+    ]
+  end
 end
