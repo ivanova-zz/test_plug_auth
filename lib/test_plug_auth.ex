@@ -13,15 +13,15 @@ defmodule TestPlugAuth do
       :world
 
   """
-  defmacro __using__ (options) do
-    use Guardian.Plug.Pipeline, otp_app: unquote(options[:otp_app]),
-                                module: unquote(options[:module]),
-                                error_handler: unquote(options[:error_handler])
-
-    plug Guardian.Plug.VerifyHeader, realm: unquote(options[:realm])
-    plug Guardian.Plug.EnsureAuthenticated
-    plug Guardian.Plug.LoadResource
-    IO.puts("start")
+  defmacro __using__ (options \\ []) do
+#    use Guardian.Plug.Pipeline, otp_app: unquote(options[:otp_app]),
+#                                module: unquote(options[:module]),
+#                                error_handler: unquote(options[:error_handler])
+#
+#    plug Guardian.Plug.VerifyHeader, realm: unquote(options[:realm])
+#    plug Guardian.Plug.EnsureAuthenticated
+#    plug Guardian.Plug.LoadResource
+    IO.puts(options)
   end
   def init(options) do
 #    @behaviour Guardian
