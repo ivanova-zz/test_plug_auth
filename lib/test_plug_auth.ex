@@ -72,7 +72,8 @@ defmodule TestPlugAuth do
 #    end
     IO.puts("start call")
     user = Guardian.Plug.current_resource(conn)
-    IO.puts("user: #{inspect user}}")
+    IO.puts("user: #{inspect user}")
+    IO.puts("conf: #{inspect Guardian.config()}")
     if conn.body_params["author"] == user.id do
       conn
     else
