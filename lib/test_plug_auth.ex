@@ -36,7 +36,7 @@ defmodule TestPlugAuth do
 
       def resource_from_claims(claims) do
         id = claims["sub"]
-        resource = MyApi.Accounts.get_user!(id)
+        resource = unquote(options[:account]).get_user!(id)
         {:ok,  resource}
       end
 
