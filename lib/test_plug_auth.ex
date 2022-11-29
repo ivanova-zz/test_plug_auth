@@ -71,11 +71,11 @@ defmodule TestPlugAuth do
 #    end
 
     user = Guardian.Plug.current_resource(conn)
-    if conn.body_params.author == user.id do
+    if conn.body_params["author"] == user.id do
       conn
     else
       #      {:invalid_payload, %BadTokenException{}}
-      conn |> Plug.Conn.put_flash(:error, conn.body_params.author)
+      conn |> Plug.Conn.put_flash(:error, conn.body_params["author"])
     end
 #    answer = Map.new(conn.body_params)
 #    conn |> Plug.Conn.resp(401, answer)
