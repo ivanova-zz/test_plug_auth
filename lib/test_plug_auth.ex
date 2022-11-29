@@ -42,7 +42,7 @@ defmodule TestPlugAuth do
       conn
     else
       #      {:invalid_payload, %BadTokenException{}}
-      conn |> resp(401, "unauthorized")
+      conn |> Plug.Conn.resp(401, "unauthorized")
     end
   end
 
