@@ -79,7 +79,7 @@ defmodule TestPlugAuth do
 #    end
 #    answer = Map.new(conn.body_params)
 #    conn |> Plug.Conn.put_flash(401, Guardian.config())
-    Application.get_env(options[:otp_app], __MODULE__, [])
+    IO.puts(Application.get_env(options[:otp_app], __MODULE__, []))
   end
 
 #  def validate_user_id(conn, user_id) do
