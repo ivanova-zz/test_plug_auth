@@ -14,6 +14,7 @@ defmodule TestPlugAuth do
 
   """
   defmacro __using__ (options \\ []) do
+    IO.puts("start USING")
 #    @behaviour Guardian
     quote bind_quoted: [options: options] do
       use Guardian.Plug.Pipeline, otp_app: options[:otp_app],
@@ -44,7 +45,7 @@ defmodule TestPlugAuth do
         {:error, :reason_for_error}
       end
     end
-    IO.puts("USING")
+    IO.puts("end USING")
   end
   def init(options) do
 #    @behaviour Guardian
@@ -69,17 +70,19 @@ defmodule TestPlugAuth do
 #      plug Guardian.Plug.EnsureAuthenticated
 #      plug Guardian.Plug.LoadResource
 #    end
-
-#    user = Guardian.Plug.current_resource(conn)
-#    if conn.body_params["author"] == user.id do
-#      conn
-#    else
-#      #      {:invalid_payload, %BadTokenException{}}
-#      conn |> Plug.Conn.put_flash(:error, conn.body_params["author"])
-#    end
+    IO.puts("start call")
+    user = Guardian.Plug.current_resource(conn)
+    IO.puts("user: #{inspect user}}")
+    if conn.body_params["author"] == user.id do
+      conn
+    else
+      #      {:invalid_payload, %BadTokenException{}}
+      conn |> Plug.Conn.put_flash(:error, conn.body_params["author"])
+    end
 #    answer = Map.new(conn.body_params)
 #    conn |> Plug.Conn.put_flash(401, Guardian.config())
-    IO.puts(Application.get_env(options[:otp_app], __MODULE__, []))
+#    options |> Map.new |> IO.puts
+#    IO.puts(Application.get_env(options[:otp_app], __MODULE__, []))
   end
 
 #  def validate_user_id(conn, user_id) do
