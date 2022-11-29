@@ -25,7 +25,6 @@ defmodule TestPlugAuth do
       plug Guardian.Plug.LoadResource
     end
     IO.puts("USING")
-    IO.puts(options)
   end
   def init(options) do
 #    @behaviour Guardian
