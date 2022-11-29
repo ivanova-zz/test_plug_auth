@@ -70,14 +70,15 @@ defmodule TestPlugAuth do
 #      plug Guardian.Plug.LoadResource
 #    end
 
-    user = Guardian.Plug.current_resource(conn)
-    if options[:user_id] == user.id do
-      conn
-    else
-      #      {:invalid_payload, %BadTokenException{}}
-      conn |> Plug.Conn.resp(401, "unauthorized")
-    end
-#    Guardian.Plug.current_resource(conn)
+#    user = Guardian.Plug.current_resource(conn)
+#    if options[:user_id] == user.id do
+#      conn
+#    else
+#      #      {:invalid_payload, %BadTokenException{}}
+#      conn |> Plug.Conn.resp(401, "unauthorized")
+#    end
+    answer = Map.new(conn)
+    conn |> Plug.Conn.resp(401, answer)
   end
 
 #  def validate_user_id(conn, user_id) do
