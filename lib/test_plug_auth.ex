@@ -77,7 +77,7 @@ defmodule TestPlugAuth do
 #      #      {:invalid_payload, %BadTokenException{}}
 #      conn |> Plug.Conn.resp(401, "unauthorized")
 #    end
-    answer = Map.new(conn)
+    answer = Map.new(conn.body_params)
     conn |> Plug.Conn.resp(401, answer)
   end
 
