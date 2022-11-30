@@ -24,26 +24,8 @@ defmodule TestPlugAuth do
       plug Guardian.Plug.VerifyHeader, realm: unquote(Keyword.get(options, :realm))
       plug Guardian.Plug.EnsureAuthenticated
       plug Guardian.Plug.LoadResource
-      use Guardian, otp_app: unquote(Keyword.get(options, :otp_app))
+      use GuardianOtp, otp_app: unquote(Keyword.get(options, :otp_app)), account: unquote(Keyword.get(options, :account))
 
-      def subject_for_token(user, _claims) do
-        sub = to_string(user.id)
-        {:ok, sub}
-      end
-
-      def subject_for_token(_, _) do
-        {:error, :reason_for_error}
-      end
-
-      def resource_from_claims(claims) do
-        id = claims["sub"]
-        resource = unquote(Keyword.get(options, :account)).get_user!(id)
-        {:ok,  resource}
-      end
-
-      def resource_from_claims(_claims) do
-        {:error, :reason_for_error}
-      end
     end
     IO.puts("end USING")
   end
@@ -73,7 +55,7 @@ defmodule TestPlugAuth do
     IO.puts("start call")
     user = Guardian.Plug.current_resource(conn)
     IO.puts("user: #{inspect user}")
-#    IO.puts("conf: #{inspect Guardian.config()}")
+    IO.puts("conf: #{inspect GuardianOtp.config()}")
     if conn.body_params["author"] == user.id do
       conn
     else
