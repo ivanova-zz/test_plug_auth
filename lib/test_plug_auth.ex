@@ -4,7 +4,8 @@ defmodule TestPlugAuth do
 
   defmacro __using__(options) do
     IO.puts("options in using: #{inspect options}")
-    behaviour = get_module(Keyword.get(options, :module))
+#    behaviour = get_module(Keyword.get(options, :module))
+    behaviour = Keyword.get(options, :module).module
     IO.puts("behaviour in using: #{inspect behaviour}")
     IO.puts("caller: #{inspect  __CALLER__.module }")
     module = __CALLER__.module
