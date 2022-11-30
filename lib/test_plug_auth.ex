@@ -7,7 +7,7 @@ defmodule TestPlugAuth do
     quote bind_quoted: [options: options] do
       use unquote(Keyword.get(options, :module))
       def unquote(:check_user)() do
-        unquote(Keyword.get(options, :module)).get_user_id()
+        unquote(Macro.expand(Keyword.get(options, :module)), __CALLER__).get_user_id()
       end
     end
   end
