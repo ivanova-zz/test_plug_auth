@@ -11,10 +11,11 @@ defmodule TestPlugAuth do
              |> Atom.to_string
              |> String.replace("Web.Router", ".Guardian")
              |> String.to_atom
+    IO.puts("caller: #{inspect  module}")
     quote do
-      alias unquote(String.to_atom(behaviour))
+      alias unquote(behaviour)
       def unquote(:check_user)() do
-        unquote(String.to_atom(behaviour)).get_user_id()
+        unquote(behaviour).get_user_id()
       end
     end
   end
