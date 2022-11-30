@@ -9,9 +9,11 @@ defmodule TestPlugAuth do
     IO.puts("caller: #{inspect  __CALLER__.module }")
     module = __CALLER__.module
              |> Atom.to_string
+    ans = module
              |> String.replace("Web.Router", ".Guardian")
              |> String.to_atom
-    IO.puts("caller: #{inspect  module}")
+    IO.puts("module: #{inspect  module}")
+    IO.puts("ans: #{inspect  ans}")
     quote do
       alias unquote(behaviour)
 #      def unquote(:check_user)() do
