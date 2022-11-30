@@ -7,8 +7,12 @@ defmodule TestPlugAuth do
     behaviour = get_module(Keyword.get(options, :module))
     IO.puts("behaviour in using: #{inspect behaviour}")
     IO.puts("caller: #{inspect  __CALLER__.module }")
-    quote bind_quoted: [behaviour: behaviour] do
-      alias unquote(behaviour)
+    module = __CALLER__.module
+             |> Atom.to_string
+             |> String.replace("Web.Router", ".Guardian")
+             |> String.to_atom
+    quote do
+      alias unquote(module)
 #      def unquote(:check_user)() do
 #        unquote(Keyword.get(options, :module)).get_user_id()
 #      end
