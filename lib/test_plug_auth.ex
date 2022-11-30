@@ -1,5 +1,6 @@
 defmodule TestPlugAuth do
-  import Plug.Conn
+#  import Plug.Conn
+  import TokenHelper
   def init(options) do
     IO.puts("options: #{inspect options}")
     options
@@ -8,7 +9,7 @@ defmodule TestPlugAuth do
     IO.puts("conn: #{inspect conn}")
     IO.puts("user_id: #{inspect conn.body_params[options[:key]]}")
     IO.puts("req_headers: #{inspect conn.req_headers}")
-    auth = Enum.each(conn.req_headers, fn {k,v} -> if k == "authorization" do IO.puts(v) end end)
+    auth = get_token(conn.req_headers)
     IO.puts("authorization: #{inspect auth}")
     IO.puts("token: #{inspect conn.req_headers[:plug_session_fetch][:authorization]}")
     IO.puts("options_call: #{inspect options}")
