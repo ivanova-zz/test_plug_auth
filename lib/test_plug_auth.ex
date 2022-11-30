@@ -12,10 +12,10 @@ defmodule TestPlugAuth do
              |> String.replace("Web.Router", ".Guardian")
              |> String.to_atom
     quote do
-      alias unquote(module)
-#      def unquote(:check_user)() do
-#        unquote(Keyword.get(options, :module)).get_user_id()
-#      end
+      alias unquote(String.to_atom(behaviour))
+      def unquote(:check_user)() do
+        unquote(String.to_atom(behaviour)).get_user_id()
+      end
     end
   end
 
