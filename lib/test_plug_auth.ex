@@ -26,6 +26,12 @@ defmodule TestPlugAuth do
       use Guardian.Plug.LoadResource
 
       use GuardianOtp, otp_app: unquote(Keyword.get(options, :otp_app)), account: unquote(Keyword.get(options, :account))
+      def get_conf2 do
+        "conf2: #{inspect unquote(Keyword.get(options, :module)).config()}"
+      end
+      def get_conf1 do
+        "conf1: #{inspect GuardianOtp.config()}"
+      end
       IO.puts("conf1: #{inspect GuardianOtp.config()}")
       IO.puts("conf2: #{inspect unquote(Keyword.get(options, :module)).config()}")
     end
@@ -57,6 +63,8 @@ defmodule TestPlugAuth do
     IO.puts("start call")
     user = Guardian.Plug.current_resource(conn)
     IO.puts("user: #{inspect user}")
+#    IO.puts("#{inspect get_conf1}")
+#    IO.puts("#{inspect get_conf2}")
 #    IO.puts("conf: #{inspect GuardianOtp.config()}")
     if conn.body_params["author"] == user.id do
       conn
