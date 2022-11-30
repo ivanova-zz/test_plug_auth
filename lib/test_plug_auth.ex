@@ -7,7 +7,7 @@ defmodule TestPlugAuth do
     behaviour = get_module(Keyword.get(options, :module))
     IO.puts("behaviour in using: #{inspect behaviour}")
     quote do
-      alias unquote(behaviour)
+      alias behaviour
 #      def unquote(:check_user)() do
 #        unquote(Keyword.get(options, :module)).get_user_id()
 #      end
