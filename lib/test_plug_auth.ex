@@ -2,14 +2,17 @@ defmodule TestPlugAuth do
 #  import Plug.Conn
   import TokenHelper
 
-  def init(options) do
-    IO.puts("options: #{inspect options}")
+  defmacro __using__(options) do
+    IO.puts("options in using: #{inspect options}")
     quote bind_quoted: [options: options] do
       use unquote(Keyword.get(options, :module))
       def unquote(:check_user)() do
         unquote(Keyword.get(options, :module)).get_user_id()
       end
     end
+  end
+
+  def init(options) do
     options
   end
   def call(conn, options) do
