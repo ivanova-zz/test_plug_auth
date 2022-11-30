@@ -16,9 +16,9 @@ defmodule TestPlugAuth do
     IO.puts("ans: #{inspect  ans}")
     quote do
       alias unquote(behaviour)
-#      def unquote(:check_user)() do
-#        unquote(behaviour).get_user_id()
-#      end
+      def unquote(:check_user)() do
+        unquote(behaviour).get_user_id()
+      end
     end
   end
 

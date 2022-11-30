@@ -15,8 +15,7 @@ defmodule TokenHelper do
     mod
     |> Tuple.to_list
     |> List.last
-    |> Enum.reduce("", fn(x, acc) -> acc <> "." <> Atom.to_string(x) end)
-    |> String.replace(".", "", global: false)
+    |> Enum.reduce("Elixir", fn(x, acc) -> acc <> "." <> Atom.to_string(x) end)
     |> String.to_atom
   end
 
