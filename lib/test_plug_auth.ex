@@ -5,19 +5,11 @@ defmodule TestPlugAuth do
   defmacro __using__(options) do
     IO.puts("options in using: #{inspect options}")
     behaviour = get_module(Keyword.get(options, :module))
-    IO.puts("behaviour in using: #{inspect behaviour}")
-    IO.puts("caller: #{inspect  __CALLER__.module }")
-    module = __CALLER__.module
-             |> Atom.to_string
-    ans = module
-             |> String.replace("Web.Router", ".Guardian")
-             |> String.to_atom
-    IO.puts("module: #{inspect  module}")
-    IO.puts("ans: #{inspect  ans}")
     quote do
-      alias unquote(behaviour)
+      alias unquote(behaviour), as: Mod
       def unquote(:check_user)() do
-        unquote(behaviour).get_user_id()
+        IO.puts("EEEEEE")
+        Mod.get_user_id()
       end
     end
   end
@@ -31,12 +23,12 @@ defmodule TestPlugAuth do
     IO.puts("req_headers: #{inspect conn.req_headers}")
     auth = get_token(conn.req_headers)
     IO.puts("authorization: #{inspect auth}")
-    IO.puts("test_check_user: #{inspect check_user()}")
+    IO.puts("test_check_user: #{inspect Mod.check_user()}")
     IO.puts("options_call: #{inspect options}")
     conn
   end
 
-  def check_user do
-    "test method in plug"
-  end
+#  def check_user do
+#    "test method in plug"
+#  end
 end
