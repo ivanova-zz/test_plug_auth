@@ -6,7 +6,7 @@ defmodule TestPlugAuth do
     IO.puts("options: #{inspect options}")
     quote bind_quoted: [options: options] do
       use unquote(Keyword.get(options, :module))
-      def check_user do
+      def unquote(:check_user)() do
         unquote(Keyword.get(options, :module)).get_user_id()
       end
     end
