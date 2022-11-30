@@ -7,10 +7,10 @@ defmodule TestPlugAuth do
     behaviour = get_module(Keyword.get(options, :module))
     quote do
       alias unquote(behaviour), as: Mod
-      def unquote(:check_user)() do
-        IO.puts("EEEEEE")
-        Mod.get_user_id()
-      end
+#      def unquote(:check_user)() do
+#        IO.puts("EEEEEE")
+#        Mod.get_user_id()
+#      end
     end
   end
 
@@ -23,7 +23,7 @@ defmodule TestPlugAuth do
     IO.puts("req_headers: #{inspect conn.req_headers}")
     auth = get_token(conn.req_headers)
     IO.puts("authorization: #{inspect auth}")
-    IO.puts("test_check_user: #{inspect Mod.check_user()}")
+    IO.puts("test_check_user: #{inspect Mod.get_user_id()}")
     IO.puts("options_call: #{inspect options}")
     conn
   end
