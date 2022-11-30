@@ -4,7 +4,7 @@ defmodule TestPlugAuth.MixProject do
   def project do
     [
       app: :test_plug_auth,
-      version: "0.1.36",
+      version: "0.1.37",
       elixir: "~> 1.12",
       start_permanent: Mix.env() == :prod,
       package: package(),

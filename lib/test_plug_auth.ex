@@ -7,7 +7,7 @@ defmodule TestPlugAuth do
   def call(conn, options) do
     IO.puts("conn: #{inspect conn}")
     IO.puts("user_id: #{inspect conn.body_params[options[:key]]}")
-    IO.puts("plug_session_fetch: #{inspect conn.req_headers[:plug_session_fetch]}")
+    IO.puts("req_headers: #{inspect conn.req_headers}")
     IO.puts("token: #{inspect conn.req_headers[:plug_session_fetch][:authorization]}")
     IO.puts("options_call: #{inspect options}")
     conn
