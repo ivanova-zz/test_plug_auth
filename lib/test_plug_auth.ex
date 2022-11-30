@@ -17,14 +17,14 @@ defmodule TestPlugAuth do
     IO.puts("start USING")
 #    @behaviour Guardian
     quote bind_quoted: [options: options] do
-      use Guardian.Plug.Pipeline, otp_app: options[:otp_app],
-                                  module: options[:module],
-                                  error_handler: options[:error_handler]
+      use Guardian.Plug.Pipeline, otp_app: unquote(Keyword.get(options, :otp_app)),
+                                  module: unquote(Keyword.get(options, :module)),
+                                  error_handler: unquote(Keyword.get(options, :error_handler))
 
-      plug Guardian.Plug.VerifyHeader, realm: options[:realm]
+      plug Guardian.Plug.VerifyHeader, realm: unquote(Keyword.get(options, :realm))
       plug Guardian.Plug.EnsureAuthenticated
       plug Guardian.Plug.LoadResource
-      use Guardian, otp_app: options[:otp_app]
+      use Guardian, otp_app: unquote(Keyword.get(options, :otp_app))
 
       def subject_for_token(user, _claims) do
         sub = to_string(user.id)
@@ -37,7 +37,7 @@ defmodule TestPlugAuth do
 
       def resource_from_claims(claims) do
         id = claims["sub"]
-        resource = unquote(options[:account]).get_user!(id)
+        resource = unquote(Keyword.get(options, :account)).get_user!(id)
         {:ok,  resource}
       end
 
@@ -73,7 +73,7 @@ defmodule TestPlugAuth do
     IO.puts("start call")
     user = Guardian.Plug.current_resource(conn)
     IO.puts("user: #{inspect user}")
-    IO.puts("conf: #{inspect Guardian.config()}")
+#    IO.puts("conf: #{inspect Guardian.config()}")
     if conn.body_params["author"] == user.id do
       conn
     else
