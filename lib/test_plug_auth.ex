@@ -7,26 +7,24 @@ defmodule TestPlugAuth do
     behaviour = get_module(Keyword.get(options, :module))
     quote do
       alias unquote(behaviour), as: Mod
-#      def unquote(:check_user)() do
-#        IO.puts("EEEEEE")
-#        Mod.get_user_id()
-#      end
+      IO.puts("test_check_user: #{inspect Mod.get_user_id()}")
+      def init(options) do
+        options
+      end
+      def call(conn, options) do
+        IO.puts("conn: #{inspect conn}")
+        IO.puts("user_id: #{inspect conn.body_params[options[:key]]}")
+        IO.puts("req_headers: #{inspect conn.req_headers}")
+        auth = get_token(conn.req_headers)
+        IO.puts("authorization: #{inspect auth}")
+        IO.puts("test_check_user: #{inspect Mod.get_user_id()}")
+        IO.puts("options_call: #{inspect options}")
+        conn
+      end
     end
   end
 
-  def init(options) do
-    options
-  end
-  def call(conn, options) do
-    IO.puts("conn: #{inspect conn}")
-    IO.puts("user_id: #{inspect conn.body_params[options[:key]]}")
-    IO.puts("req_headers: #{inspect conn.req_headers}")
-    auth = get_token(conn.req_headers)
-    IO.puts("authorization: #{inspect auth}")
-    IO.puts("test_check_user: #{inspect Mod.get_user_id()}")
-    IO.puts("options_call: #{inspect options}")
-    conn
-  end
+
 
 #  def check_user do
 #    "test method in plug"
