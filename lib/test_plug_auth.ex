@@ -5,7 +5,7 @@ defmodule TestPlugAuth do
   defmacro __using__(options) do
     IO.puts("options in using: #{inspect options}")
     quote bind_quoted: [options: options] do
-      alias unquote(Keyword.get(options, :module))
+      alias Keyword.get(options, :module)
 #      def unquote(:check_user)() do
 #        unquote(Keyword.get(options, :module)).get_user_id()
 #      end
