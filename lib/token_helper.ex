@@ -10,4 +10,12 @@ defmodule TokenHelper do
     |> String.split(" ")
     |> List.last
   end
+
+  def get_module(mod) do
+    mod
+    |> Tuple.to_list
+    |> List.last
+    |> Enum.reduce("", fn(x, acc) -> acc <> "." <> Atom.to_string(x) end)
+    |> String.replace(".", "", global: false)
+  end
 end

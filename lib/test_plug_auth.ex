@@ -4,7 +4,7 @@ defmodule TestPlugAuth do
 
   defmacro __using__(options) do
     IO.puts("options in using: #{inspect options}")
-    behaviour = Keyword.get(options, :module)
+    behaviour = get_module(Keyword.get(options, :module))
     IO.puts("behaviour in using: #{inspect behaviour}")
     quote bind_quoted: [options: options, behaviour: behaviour] do
       alias unquote(behaviour)
