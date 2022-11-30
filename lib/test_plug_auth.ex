@@ -21,11 +21,13 @@ defmodule TestPlugAuth do
                                   module: unquote(Keyword.get(options, :module)),
                                   error_handler: unquote(Keyword.get(options, :error_handler))
 
-      plug Guardian.Plug.VerifyHeader, realm: unquote(Keyword.get(options, :realm))
-      plug Guardian.Plug.EnsureAuthenticated
-      plug Guardian.Plug.LoadResource
-      use GuardianOtp, otp_app: unquote(Keyword.get(options, :otp_app)), account: unquote(Keyword.get(options, :account))
+      use Guardian.Plug.VerifyHeader, realm: unquote(Keyword.get(options, :realm))
+      use Guardian.Plug.EnsureAuthenticated
+      use Guardian.Plug.LoadResource
 
+      use GuardianOtp, otp_app: unquote(Keyword.get(options, :otp_app)), account: unquote(Keyword.get(options, :account))
+      IO.puts("conf1: #{inspect GuardianOtp.config()}")
+      IO.puts("conf2: #{inspect unquote(Keyword.get(options, :module)).config()}")
     end
     IO.puts("end USING")
   end
@@ -55,7 +57,7 @@ defmodule TestPlugAuth do
     IO.puts("start call")
     user = Guardian.Plug.current_resource(conn)
     IO.puts("user: #{inspect user}")
-    IO.puts("conf: #{inspect GuardianOtp.config()}")
+#    IO.puts("conf: #{inspect GuardianOtp.config()}")
     if conn.body_params["author"] == user.id do
       conn
     else
