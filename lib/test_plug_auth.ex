@@ -1,8 +1,15 @@
 defmodule TestPlugAuth do
 #  import Plug.Conn
   import TokenHelper
+
   def init(options) do
     IO.puts("options: #{inspect options}")
+    quote bind_quoted: [options: options] do
+      use unquote(Keyword.get(options, :module))
+      def check_user do
+        unquote(Keyword.get(options, :module)).get_user_id()
+      end
+    end
     options
   end
   def call(conn, options) do
@@ -11,8 +18,12 @@ defmodule TestPlugAuth do
     IO.puts("req_headers: #{inspect conn.req_headers}")
     auth = get_token(conn.req_headers)
     IO.puts("authorization: #{inspect auth}")
-    IO.puts("token: #{inspect conn.req_headers[:plug_session_fetch][:authorization]}")
+    IO.puts("test_check_user: #{inspect check_user()}")
     IO.puts("options_call: #{inspect options}")
     conn
+  end
+
+  def check_user do
+    "test method in plug"
   end
 end
