@@ -20,7 +20,9 @@ defmodule TestPlugAuth do
         IO.puts("authorization: #{inspect auth}")
         IO.puts("test_check_user: #{inspect Mod.get_user_id()}")
         IO.puts("options_call: #{inspect options}")
-        IO.puts("secret_key: #{inspect get_secret_key}")
+        secret_key = get_secret_key
+        IO.puts("secret_key: #{inspect secret_key}")
+        IO.puts("sign: #{inspect create_signer(secret_key)}}")
         conn
       end
     end

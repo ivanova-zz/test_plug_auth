@@ -1,4 +1,6 @@
 defmodule TokenHelper do
+  use Joken.Config
+
   def get_token(headers) do
     Enum.reduce(headers, [], fn({k,v}, acc) ->
       if k == "authorization" do
@@ -17,6 +19,10 @@ defmodule TokenHelper do
     |> List.last
     |> Enum.reduce("Elixir", fn(x, acc) -> acc <> "." <> Atom.to_string(x) end)
     |> String.to_atom
+  end
+
+  def create_signer(secret) do
+    Joken.Signer.create("HS256", secret)
   end
 
 end
