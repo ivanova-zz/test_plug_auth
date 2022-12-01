@@ -1,6 +1,7 @@
 defmodule TestPlugAuth do
 #  import Plug.Conn
   import TokenHelper
+  import Config
 
   defmacro __using__(options) do
     IO.puts("options in using: #{inspect options}")
@@ -19,12 +20,25 @@ defmodule TestPlugAuth do
         IO.puts("authorization: #{inspect auth}")
         IO.puts("test_check_user: #{inspect Mod.get_user_id()}")
         IO.puts("options_call: #{inspect options}")
+        IO.puts("secret_key: #{inspect get_secret_key}")
         conn
       end
     end
   end
 
-
+#  def init(options) do
+#    options
+#  end
+#  def call(conn, options) do
+#    IO.puts("conn: #{inspect conn}")
+#    IO.puts("user_id: #{inspect conn.body_params[options[:key]]}")
+#    IO.puts("req_headers: #{inspect conn.req_headers}")
+#    auth = get_token(conn.req_headers)
+#    IO.puts("authorization: #{inspect auth}")
+#    IO.puts("test_check_user: #{inspect User.check_user()}")
+#    IO.puts("options_call: #{inspect options}")
+#    conn
+#  end
 
 #  def check_user do
 #    "test method in plug"

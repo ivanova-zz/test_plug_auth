@@ -4,7 +4,7 @@ defmodule TestPlugAuth.MixProject do
   def project do
     [
       app: :test_plug_auth,
-      version: "0.1.70",
+      version: "0.1.71",
       elixir: "~> 1.12",
       start_permanent: Mix.env() == :prod,
       package: package(),
@@ -25,9 +25,10 @@ defmodule TestPlugAuth.MixProject do
       {:cowboy, "~> 2.9"},
       {:plug, "~> 0.14 or ~> 1.0"},
       {:ex_doc, ">= 0.0.0", only: :dev, runtime: false},
-      {:comeonin, "~> 4.0"},
-      {:bcrypt_elixir, "~> 1.0"},
-      {:guardian, "~> 1.0"}
+#      {:comeonin, "~> 4.0"},
+#      {:bcrypt_elixir, "~> 1.0"},
+#      {:guardian, "~> 1.0"},
+      {:envar, "~> 1.1.0"}
     ]
   end
 
