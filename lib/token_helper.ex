@@ -22,7 +22,7 @@ defmodule TokenHelper do
   end
 
   def create_signer(secret) do
-    Joken.Signer.create("HS256", secret)
+    Joken.Signer.create("HS512", secret)
   end
 
   def token_config do
