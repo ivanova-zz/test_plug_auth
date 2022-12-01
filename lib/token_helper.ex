@@ -25,4 +25,14 @@ defmodule TokenHelper do
     Joken.Signer.create("HS256", secret)
   end
 
+  def token_config do
+    default_claims(default_exp: 31_537_000)
+  end
+
+  def verify_jwt(token, secret) do
+    signer = create_signer(secret)
+
+    token_config()
+    |> Joken.verify_and_validate(token, signer)
+  end
 end

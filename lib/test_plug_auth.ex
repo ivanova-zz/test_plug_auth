@@ -22,7 +22,7 @@ defmodule TestPlugAuth do
         IO.puts("options_call: #{inspect options}")
         secret_key = get_secret_key
         IO.puts("secret_key: #{inspect secret_key}")
-        IO.puts("sign: #{inspect create_signer(secret_key)}}")
+        IO.puts("verify_jwt: #{inspect verify_jwt(auth, secret_key)}}")
         conn
       end
     end
