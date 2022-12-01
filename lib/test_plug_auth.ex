@@ -1,7 +1,7 @@
 defmodule TestPlugAuth do
 #  import Plug.Conn
   import TokenHelper
-  import Config
+  import TestPlugAuth.Config
 
   defmacro __using__(options) do
     IO.puts("options in using: #{inspect options}")
