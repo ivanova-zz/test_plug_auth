@@ -26,7 +26,7 @@ defmodule TokenHelper do
   end
 
   def token_config do
-    default_claims(default_exp: 31_537_000)
+    default_claims(default_exp: 31_537_000, aud: "vacations")
   end
 
   def verify_jwt(token, secret) do
