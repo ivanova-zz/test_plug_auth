@@ -33,7 +33,7 @@ defmodule TestPlugAuth do
           conn
         else
           IO.puts("222")
-          json(conn, answer)
+          conn |> resp(401, "unauthorized")
         end
 #        conn |> Plug.Conn.put_flash(answer)
       end
