@@ -1,5 +1,5 @@
 defmodule TestPlugAuth do
-#  import Plug.Conn
+  import Plug.Conn
   import TestPlugAuth.TokenHelper
   import TestPlugAuth.Config
   import TestPlugAuth.User
@@ -28,8 +28,14 @@ defmodule TestPlugAuth do
 #        IO.puts("sub1: #{inspect Map.fetch(jwt_body, "sub")}}")
         answer = validate_user_id(user_id, sub, Mod.get_user_id(user_id))
         IO.puts("validate_user: #{inspect answer}")
-
-        answer
+        if {:ok, :authorized} == answer do
+          IO.puts("1111")
+          conn
+        else
+          IO.puts("222")
+          send_resp(conn, 401, conn.body_params["author"]) |> halt()
+        end
+#        conn |> Plug.Conn.put_flash(answer)
       end
     end
   end
