@@ -26,9 +26,11 @@ defmodule TestPlugAuth.TokenHelper do
   end
 
   def token_config(aud, iss) do
-    IO.puts("aud: #{inspect to_string(aud)}")
-    IO.puts("iss: #{inspect to_string(iss)}")
     default_claims(default_exp: 31_537_000, aud: to_string(aud), iss: to_string(iss))
+  end
+
+  def token_config(aud, iss, role) do
+    default_claims(default_exp: 31_537_000, aud: to_string(aud), iss: to_string(iss), role: to_string(role))
   end
 
   def verify_jwt(token, secret, aud, iss) do
@@ -36,5 +38,15 @@ defmodule TestPlugAuth.TokenHelper do
 
     token_config(aud, iss)
     |> Joken.verify_and_validate(token, signer)
+  end
+
+  def generate_jwt!(claims, secret, aud, iss, role) do
+    signer = create_signer(secret)
+
+    {:ok, token, _claims} =
+      token_config(aud, iss, role)
+      |> Joken.generate_and_sign(claims, signer)
+
+    token
   end
 end
