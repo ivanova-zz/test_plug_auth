@@ -33,7 +33,7 @@ defmodule TestPlugAuth do
           conn
         else
           IO.puts("222")
-          send_resp(conn, 401, conn.body_params["author"]) |> halt()
+          json(conn, answer)
         end
 #        conn |> Plug.Conn.put_flash(answer)
       end
