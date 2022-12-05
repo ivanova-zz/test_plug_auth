@@ -24,7 +24,7 @@ defmodule TestPlugAuth do
         IO.puts("secret_key: #{inspect secret_key}")
         {:ok, jwt_body} = verify_jwt(auth, secret_key, Keyword.get(options, :aud), Keyword.get(options, :iss))
         IO.puts("verify_jwt: #{inspect jwt_body}}")
-        IO.puts("sub: #{inspect jwt_body.sub}}")
+        IO.puts("sub: #{inspect Keyword.get(jwt_body, "sub")}}")
         IO.puts("validate_user: #{inspect validate_user_id(user_id, jwt_body.sub, Mod.get_user_id(user_id))}")
 
         conn
