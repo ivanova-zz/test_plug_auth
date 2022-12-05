@@ -13,7 +13,6 @@ defmodule TestPlugAuth do
         options
       end
       def call(conn, options) do
-        IO.puts("conn: #{inspect conn}")
         user_id = conn.body_params[options[:key]]
         IO.puts("user_id: #{inspect user_id}")
         IO.puts("req_headers: #{inspect conn.req_headers}")

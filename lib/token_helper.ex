@@ -26,7 +26,9 @@ defmodule TokenHelper do
   end
 
   def token_config(aud, iss) do
-    default_claims(default_exp: 31_537_000, aud: "vacations", iss: "vacations")
+    IO.puts("aud: #{inspect to_string(aud)}")
+    IO.puts("iss: #{inspect to_string(iss)}")
+    default_claims(default_exp: 31_537_000, aud: to_string(aud), iss: to_string(iss))
   end
 
   def verify_jwt(token, secret, aud, iss) do
