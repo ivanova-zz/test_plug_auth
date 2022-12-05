@@ -1,4 +1,4 @@
-defmodule TokenHelper do
+defmodule TestPlugAuth.TokenHelper do
   use Joken.Config
 
   def get_token(headers) do

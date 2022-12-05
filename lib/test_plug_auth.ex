@@ -1,6 +1,6 @@
 defmodule TestPlugAuth do
 #  import Plug.Conn
-  import TokenHelper
+  import TestPlugAuth.TokenHelper
   import TestPlugAuth.Config
   import TestPlugAuth.User
 
@@ -24,7 +24,8 @@ defmodule TestPlugAuth do
         IO.puts("secret_key: #{inspect secret_key}")
         {:ok, jwt_body} = verify_jwt(auth, secret_key, Keyword.get(options, :aud), Keyword.get(options, :iss))
         IO.puts("verify_jwt: #{inspect jwt_body}}")
-        IO.puts("sub1: #{inspect Map.fetch(jwt_body, "sub")}}")
+        {:ok, sub} = Map.fetch(jwt_body, "sub")
+#        IO.puts("sub1: #{inspect Map.fetch(jwt_body, "sub")}}")
         IO.puts("validate_user: #{inspect validate_user_id(user_id, Map.fetch(jwt_body, "sub"), Mod.get_user_id(user_id))}")
 
         conn

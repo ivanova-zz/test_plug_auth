@@ -3,7 +3,7 @@ defmodule TestPlugAuth.User do
     IO.puts("user_id: #{inspect user_id}")
     IO.puts("sub: #{inspect sub}")
     IO.puts("resource.id: #{inspect resource.id}")
-    if user_id == sub == resource.id do
+    if user_id == String.to_integer(sub) == resource.id do
       {:ok, :authorized}
     else
       {:error, :unauthorized}
