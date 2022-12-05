@@ -25,14 +25,14 @@ defmodule TokenHelper do
     Joken.Signer.create("HS512", secret)
   end
 
-  def token_config do
-    default_claims(default_exp: 31_537_000, aud: "vacations", iss: "vacations")
+  def token_config(aud, iss) do
+    default_claims(default_exp: 31_537_000, aud: aud, iss: iss)
   end
 
-  def verify_jwt(token, secret) do
+  def verify_jwt(token, secret, aud, iss) do
     signer = create_signer(secret)
 
-    token_config()
+    token_config(aud, iss)
     |> Joken.verify_and_validate(token, signer)
   end
 end
