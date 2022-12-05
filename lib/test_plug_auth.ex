@@ -26,9 +26,10 @@ defmodule TestPlugAuth do
         IO.puts("verify_jwt: #{inspect jwt_body}}")
         {:ok, sub} = Map.fetch(jwt_body, "sub")
 #        IO.puts("sub1: #{inspect Map.fetch(jwt_body, "sub")}}")
-        IO.puts("validate_user: #{inspect validate_user_id(user_id, sub, Mod.get_user_id(user_id))}")
+        answer = validate_user_id(user_id, sub, Mod.get_user_id(user_id))
+        IO.puts("validate_user: #{inspect answer}")
 
-        conn
+        answer
       end
     end
   end
