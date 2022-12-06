@@ -32,11 +32,14 @@ defmodule TestPlugAuth do
         end
       end
 
-      def generate_token(conn, user) do
-        IO.puts("user: #{inspect user}")
+      def generate_token(conn, opt) do
+        IO.puts("opt: #{inspect opt}")
+        IO.puts("opt: #{inspect conn}")
         IO.puts("resp body: #{inspect conn.body_params}")
-        token = generate_jwt!(user, get_secret_key, "vacations", "vacations", "manager")
+#        token = generate_jwt!(conn.body_params, get_secret_key, opt.aud, opt.iss)
+        token = generate_jwt!(conn.body_params, get_secret_key, "vacations", "vacations")
         IO.puts("token: #{inspect token}")
+        token
       end
     end
   end
