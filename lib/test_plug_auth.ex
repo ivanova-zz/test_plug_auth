@@ -23,6 +23,7 @@ defmodule TestPlugAuth do
         {:ok, jwt_body} = verify_jwt(token, secret_key, Keyword.get(options, :aud), Keyword.get(options, :iss))
         IO.puts("verify_jwt: #{inspect jwt_body}}")
         {:ok, sub} = Map.fetch(jwt_body, "sub")
+        IO.puts("sub: #{inspect sub}")
         answer = validate_user_id(user_id, sub, Mod.get_user_id(user_id))
         IO.puts("validate_user: #{inspect answer}")
         if {:ok, :authorized} == answer do
